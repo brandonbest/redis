@@ -1,0 +1,16 @@
+version: '3'
+services:
+
+    # Database
+    redis:
+        build:
+            context: ./
+            dockerfile: app.dockerfile
+        container_name: 'redis'
+        expose:
+            - ${REDIS_PORT:-6379}
+        ports:
+            - ${REDIS_PORT:-6379}:6379
+        restart: on-failure
+        volumes:
+            - ${DATA_DIR:-./data}:/var/lib/redis
